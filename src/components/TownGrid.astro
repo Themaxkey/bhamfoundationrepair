@@ -1,0 +1,11 @@
+---
+import { site } from '../../site.config';
+---
+<div class="grid">
+  {site.towns.map(t => (
+    <a class="card" href={`/${t.slug}/`}>
+      <strong>{t.name}, {site.location.stateAbbr}</strong>
+      <span>{site.trade.noun.charAt(0).toUpperCase() + site.trade.noun.slice(1)} and related work in {t.name}.</span>
+    </a>
+  ))}
+</div>

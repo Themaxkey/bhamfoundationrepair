@@ -1,0 +1,17 @@
+---
+import { site } from '../../site.config';
+import { getCollection } from 'astro:content';
+const entries = await getCollection('services');
+const byId = new Map(entries.map(e => [e.id, e.data]));
+---
+<div class="grid">
+  {site.services.map(s => {
+    const d = byId.get(s.slug);
+    return (
+      <a class="card" href={`/${s.slug}/`}>
+        <strong>{s.name}</strong>
+        <span>{d?.description ?? ''}</span>
+      </a>
+    );
+  })}
+</div>

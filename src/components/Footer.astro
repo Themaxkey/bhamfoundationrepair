@@ -1,0 +1,45 @@
+---
+import { site } from '../../site.config';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h4>{site.business.name}</h4>
+        <p>
+          Serving {site.location.city} and {site.location.county},
+          {site.location.stateAbbr}.
+        </p>
+        <p><a href={`tel:${site.business.phoneRaw}`}><strong>{site.business.phone}</strong></a></p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          {site.services.map(s => <li><a href={`/${s.slug}/`}>{s.name}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h4>Service Area</h4>
+        <ul>
+          {site.towns.slice(0, 8).map(t => <li><a href={`/${t.slug}/`}>{t.name}, KY</a></li>)}
+          <li><a href="/service-area/">All areas served</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/contact/">Contact</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/privacy-policy/">Privacy Policy</a></li>
+          <li><a href="/sms-terms-and-conditions/">SMS Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {year} {site.business.name}. All rights reserved.</p>
+      <p class="disclosure">{site.legal.disclosure}</p>
+    </div>
+  </div>
+</footer>

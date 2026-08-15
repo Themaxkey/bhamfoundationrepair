@@ -1,0 +1,91 @@
+---
+import { site } from '../../site.config';
+
+interface Props {
+  pageType?: 'home' | 'service' | 'town' | 'faq' | 'page';
+  name: string;
+  description: string;
+  url: string;
+  serviceName?: string;
+  townName?: string;
+  faq?: { question: string; answer: string }[];
+}
+
+const { pageType = 'page', name, description, url, serviceName, townName, faq } = Astro.props;
+const origin = `https://${site.business.domain}`;
+const bizId  = `${origin}/#business`;
+
+/* Service-area business: locality and region only, deliberately no street address. */
+const business = {
+  '@type': site.trade.schemaType,
+  '@id': bizId,
+  name: site.business.name,
+  url: origin + '/',
+  telephone: site.business.phoneRaw,
+  email: site.business.email,
+  image: origin + site.brand.logo,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: site.location.city,
+    addressRegion: site.location.stateAbbr,
+    postalCode: site.location.zip,
+    addressCountry: 'US',
+  },
+  geo: { '@type': 'GeoCoordinates', latitude: site.location.lat, longitude: site.location.lng },
+  areaServed: [
+    { '@type': 'City', name: `${site.location.city}, ${site.location.stateAbbr}` },
+    ...site.towns.map(t => ({ '@type': 'City', name: `${t.name}, ${site.location.stateAbbr}` })),
+    { '@type': 'AdministrativeArea', name: site.location.county },
+  ],
+  serviceArea: {
+    '@type': 'GeoCircle',
+    geoMidpoint: { '@type': 'GeoCoordinates', latitude: site.location.lat, longitude: site.location.lng },
+    geoRadius: String(site.location.radiusMi * 1609),
+  },
+  makesOffer: site.services.map(s => ({
+    '@type': 'Offer',
+    itemOffered: { '@type': 'Service', name: `${s.name} in ${site.location.city}, ${site.location.stateAbbr}` },
+  })),
+};
+
+const graph: any[] = [
+  business,
+  { '@type': 'WebSite', '@id': `${origin}/#website`, url: origin + '/', name: site.business.name, publisher: { '@id': bizId } },
+  { '@type': 'WebPage', '@id': `${url}#webpage`, url, name, description, isPartOf: { '@id': `${origin}/#website` }, about: { '@id': bizId } },
+];
+
+if (pageType === 'service' && serviceName) {
+  graph.push({
+    '@type': 'Service', '@id': `${url}#service`,
+    name: `${serviceName} in ${site.location.city}, ${site.location.stateAbbr}`,
+    serviceType: serviceName, description,
+    provider: { '@id': bizId },
+    areaServed: { '@type': 'AdministrativeArea', name: `${site.location.county}, ${site.location.state}` },
+  });
+}
+
+const tradeTitle = site.trade.noun.replace(/\b\w/g, (c) => c.toUpperCase());
+
+if (pageType === 'town' && townName) {
+  graph.push({
+    '@type': 'Service', '@id': `${url}#service`,
+    name: `${tradeTitle} in ${townName}, ${site.location.stateAbbr}`,
+    serviceType: tradeTitle, description,
+    provider: { '@id': bizId },
+    areaServed: { '@type': 'City', name: `${townName}, ${site.location.stateAbbr}` },
+  });
+}
+
+if (faq && faq.length) {
+  graph.push({
+    '@type': 'FAQPage', '@id': `${url}#faq`,
+    mainEntity: faq.map(f => ({
+      '@type': 'Question', name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  });
+}
+
+const jsonLd = { '@context': 'https://schema.org', '@graph': graph };
+---
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

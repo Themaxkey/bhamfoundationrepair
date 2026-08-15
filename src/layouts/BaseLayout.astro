@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import { site } from '../../site.config';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CallBar from '../components/CallBar.astro';
+import Schema from '../components/Schema.astro';
+
+interface Props {
+  seoTitle: string;
+  description: string;
+  pageType?: 'home' | 'service' | 'town' | 'faq' | 'page';
+  serviceName?: string;
+  townName?: string;
+  noindex?: boolean;
+  faq?: { question: string; answer: string }[];
+}
+
+const { seoTitle, description, pageType = 'page', serviceName, townName, noindex = false, faq } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seoTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex
+      ? 'noindex, follow'
+      : 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.business.name} />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <Schema
+      pageType={pageType}
+      name={seoTitle}
+      description={description}
+      url={canonical}
+      serviceName={serviceName}
+      townName={townName}
+      faq={faq}
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <CallBar />
+  </body>
+</html>
