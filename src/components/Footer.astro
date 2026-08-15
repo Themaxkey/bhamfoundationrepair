@@ -22,7 +22,7 @@ const year = new Date().getFullYear();
       <div>
         <h4>Service Area</h4>
         <ul>
-          {site.towns.slice(0, 8).map(t => <li><a href={`/${t.slug}/`}>{t.name}, KY</a></li>)}
+          {site.towns.slice(0, 8).map(t => <li><a href={`/${t.slug}/`}>{t.name}, {site.location.stateAbbr}</a></li>)}
           <li><a href="/service-area/">All areas served</a></li>
         </ul>
       </div>
