@@ -18,7 +18,16 @@
   // change it to route leads straight to them.
   "vars": {
     "LEAD_TO": "maxwellhkey@gmail.com",
-    "LEAD_FROM": "Birmingham Foundation Repair <leads@bhamfoundationrepair.com>",
+
+    // The SENDING DOMAIN here must be one Resend has verified, and the free
+    // tier only allows one — which is bgtreeremoval.com. Sending from
+    // @bhamfoundationrepair.com is rejected by Resend and the worker returns
+    // 502, so the contact form and every voicemail notification fail silently.
+    // The display name is free text, so this still reads correctly in the
+    // inbox; only the address behind it belongs to the other domain. Nobody
+    // but Max ever sees it — these are internal notifications, not replies to
+    // customers. Change it if the account is ever upgraded to multi-domain.
+    "LEAD_FROM": "Birmingham Foundation Repair <leads@bgtreeremoval.com>",
     "VOICEMAIL_TOKEN": "LsAZtVlpZxdYFe8lrpggJvvxBMoP36aTMptGHJW1"
   },
 
