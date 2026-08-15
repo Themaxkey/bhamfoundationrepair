@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Vestavia Hills, AL"
 seoTitle: "Foundation Repair Vestavia Hills, AL | Bham Foundation Repair"
-description: "Foundation repair and crawl space waterproofing in Vestavia Hills, AL. Hillside settlement, basement seepage and damp crawl spaces. Call (205) 555-0100."
+description: "Foundation repair and crawl space waterproofing in Vestavia Hills, AL. Hillside settlement, basement seepage and damp crawl spaces. Call (205) 518-9789."
 town: "Vestavia Hills"
 ---
 

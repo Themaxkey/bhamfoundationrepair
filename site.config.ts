@@ -5,21 +5,19 @@
  * schema, internal links, the phone number, the colors. To launch a new market,
  * copy this repo, edit this file, replace the content in src/content/, deploy.
  *
- * ============================ BEFORE LAUNCH ============================
- * The phone number below is a PLACEHOLDER in the 555-01xx range, which is
- * permanently reserved for fiction and cannot connect to a real person. Buy a
- * Twilio number with a 205 area code, point it at a Studio flow, and replace
- * BOTH `phone` and `phoneRaw` here. Do not launch until that is done — every
- * page, the header, the sticky call bar and the JSON-LD all read from it.
- * =======================================================================
+ * The phone number is live: a Twilio 205 number pointing at a Studio flow.
+ * It appears in the header, the sticky mobile call bar, the JSON-LD and the
+ * meta description of every page, so if it ever changes it must change HERE
+ * and in the `description:` front matter of src/content/**/*.md, which repeat
+ * it as plain text for the search snippet.
  */
 
 export const site = {
   business: {
     name:      'Birmingham Foundation Repair',
     shortName: 'Bham Foundation Repair',
-    phone:     '(205) 555-0100',      // PLACEHOLDER — see note above
-    phoneRaw:  '+12055550100',        // PLACEHOLDER — see note above
+    phone:     '(205) 518-9789',      // Twilio, 205 (Birmingham)
+    phoneRaw:  '+12055189789',
     email:     'info@bhamfoundationrepair.com',
     domain:    'bhamfoundationrepair.com',
   },

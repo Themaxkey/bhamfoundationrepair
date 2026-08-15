@@ -1,7 +1,7 @@
 ---
 title: "Crawl Space Encapsulation in Birmingham, AL"
 seoTitle: "Crawl Space Encapsulation Birmingham, AL | Sealed & Dry"
-description: "Crawl space encapsulation in Birmingham, AL. Heavy vapor barrier, sealed vents and dehumidification to stop moisture, mold and sagging floors. Call (205) 555-0100."
+description: "Crawl space encapsulation in Birmingham, AL. Heavy vapor barrier, sealed vents and dehumidification to stop moisture, mold and sagging floors. Call (205) 518-9789."
 order: 2
 ---
 

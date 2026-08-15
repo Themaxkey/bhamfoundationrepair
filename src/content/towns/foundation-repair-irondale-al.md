@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Irondale, AL"
 seoTitle: "Foundation Repair Irondale, AL | Bham Foundation Repair"
-description: "Foundation and crawl space repair in Irondale, AL. Mixed older and newer housing east of Birmingham, Cahaba River drainage. Call (205) 555-0100."
+description: "Foundation and crawl space repair in Irondale, AL. Mixed older and newer housing east of Birmingham, Cahaba River drainage. Call (205) 518-9789."
 town: "Irondale"
 ---
 

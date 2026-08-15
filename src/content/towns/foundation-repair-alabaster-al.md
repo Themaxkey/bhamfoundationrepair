@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Alabaster, AL"
 seoTitle: "Foundation Repair Alabaster, AL | Bham Foundation Repair"
-description: "Foundation repair in Alabaster, AL and north Shelby County. Slab settlement, graded lots and Shelby County limestone. Call (205) 555-0100."
+description: "Foundation repair in Alabaster, AL and north Shelby County. Slab settlement, graded lots and Shelby County limestone. Call (205) 518-9789."
 town: "Alabaster"
 ---
 

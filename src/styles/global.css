@@ -165,12 +165,16 @@ img { max-width: 100%; height: auto; display: block; }
 /* ---------- hero ---------- */
 .hero { background: var(--primary); color: #fff; padding: 3.5rem 0; }
 .hero h1 { color: #fff; }
-.hero p  { color: #e8f2ea; font-size: 1.1rem; max-width: 62ch; }
+.hero p  { color: #dbe4ef; font-size: 1.1rem; max-width: 62ch; }
 .hero .cta { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
 .hero .cta a {
   text-decoration: none; font-weight: 700; padding: .8rem 1.4rem; border-radius: var(--radius);
 }
-.cta-primary { background: var(--accent); color: #1f2937; }
+/* The hero call button is the single most important control on the site, so it
+   gets the red. Nothing else on a blue background is red, which is what makes
+   it read as loud. #dc2626 on white text is 4.83:1 — passes AA at this size. */
+.cta-primary { background: var(--red); color: #fff; }
+.cta-primary:hover { background: var(--red-dk); }
 .cta-ghost   { border: 2px solid rgba(255,255,255,.6); color: #fff; }
 
 /* ---------- content ---------- */

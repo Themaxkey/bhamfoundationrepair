@@ -1,7 +1,7 @@
 ---
 title: "Birmingham Foundation Repair"
 seoTitle: "Foundation Repair Birmingham, AL | Free Inspection"
-description: "Foundation repair, crawl space encapsulation and basement waterproofing in Birmingham, AL and Jefferson County. Free inspection. Call (205) 555-0100."
+description: "Foundation repair, crawl space encapsulation and basement waterproofing in Birmingham, AL and Jefferson County. Free inspection. Call (205) 518-9789."
 tagline: "Settlement, cracked walls, sagging floors and damp crawl spaces — assessed properly and fixed for good, across Birmingham and Jefferson County."
 ---
 

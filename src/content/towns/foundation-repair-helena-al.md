@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Helena, AL"
 seoTitle: "Foundation Repair Helena, AL | Bham Foundation Repair"
-description: "Foundation repair in Helena, AL. Settlement on newer subdivision lots, Buck Creek drainage and slab cracking. Call (205) 555-0100."
+description: "Foundation repair in Helena, AL. Settlement on newer subdivision lots, Buck Creek drainage and slab cracking. Call (205) 518-9789."
 town: "Helena"
 ---
 

@@ -33,7 +33,7 @@ Opting out of text messages does not prevent us from contacting you by phone or 
 
 ## Help
 
-Reply HELP to any message for assistance, or contact us at info@bhamfoundationrepair.com or (205) 555-0100.
+Reply HELP to any message for assistance, or contact us at info@bhamfoundationrepair.com or (205) 518-9789.
 
 ## Carrier Liability
 

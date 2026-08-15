@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Bessemer, AL"
 seoTitle: "Foundation Repair Bessemer, AL | Bham Foundation Repair"
-description: "Foundation and crawl space repair in Bessemer, AL. Older housing stock, failed piers and settling footings assessed honestly. Call (205) 555-0100."
+description: "Foundation and crawl space repair in Bessemer, AL. Older housing stock, failed piers and settling footings assessed honestly. Call (205) 518-9789."
 town: "Bessemer"
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "Basement Waterproofing in Birmingham, AL"
 seoTitle: "Basement Waterproofing Birmingham, AL | Leaks & Seepage Fixed"
-description: "Basement waterproofing in Birmingham, AL. Interior drainage, sump systems, wall sealing and exterior grading to stop seepage. Call (205) 555-0100."
+description: "Basement waterproofing in Birmingham, AL. Interior drainage, sump systems, wall sealing and exterior grading to stop seepage. Call (205) 518-9789."
 order: 4
 ---
 

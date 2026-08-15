@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Hoover, AL"
 seoTitle: "Foundation Repair Hoover, AL | Bham Foundation Repair"
-description: "Foundation repair and crawl space work in Hoover, AL. Settlement on graded hillside lots, cracked slabs and wet crawl spaces. Call (205) 555-0100."
+description: "Foundation repair and crawl space work in Hoover, AL. Settlement on graded hillside lots, cracked slabs and wet crawl spaces. Call (205) 518-9789."
 town: "Hoover"
 ---
 

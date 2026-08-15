@@ -1,7 +1,7 @@
 ---
 title: "Foundation Settlement Repair in Birmingham, AL"
 seoTitle: "Foundation Settlement Repair Birmingham, AL | Piers & Leveling"
-description: "Foundation settlement repair in Birmingham, AL. Push piers, helical piers and crawl space support to stop a sinking foundation. Call (205) 555-0100."
+description: "Foundation settlement repair in Birmingham, AL. Push piers, helical piers and crawl space support to stop a sinking foundation. Call (205) 518-9789."
 order: 5
 ---
 

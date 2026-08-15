@@ -8,7 +8,7 @@ Answers to the questions Birmingham homeowners ask most often about foundations 
 
 ## Foundation Questions We Get Asked Most
 
-These are the ones that come up on nearly every call, each answered properly rather than in a sentence. If yours is not here, call (205) 555-0100 and ask — we are happy to talk it through even if it does not turn into a job.
+These are the ones that come up on nearly every call, each answered properly rather than in a sentence. If yours is not here, call (205) 518-9789 and ask — we are happy to talk it through even if it does not turn into a job.
 
 ### How much does foundation repair cost in Birmingham?
 

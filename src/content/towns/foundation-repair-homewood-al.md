@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Homewood, AL"
 seoTitle: "Foundation Repair Homewood, AL | Bham Foundation Repair"
-description: "Foundation and crawl space repair in Homewood, AL. Sagging floors and failed piers in Edgewood and Hollywood bungalows. Call (205) 555-0100."
+description: "Foundation and crawl space repair in Homewood, AL. Sagging floors and failed piers in Edgewood and Hollywood bungalows. Call (205) 518-9789."
 town: "Homewood"
 ---
 

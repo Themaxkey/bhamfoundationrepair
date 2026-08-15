@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Birmingham, AL"
 seoTitle: "Foundation Repair Birmingham, AL | Free Inspection"
-description: "Foundation repair in Birmingham, AL and Jefferson County. Settlement, cracked walls, sticking doors and sloping floors assessed and fixed. Call (205) 555-0100."
+description: "Foundation repair in Birmingham, AL and Jefferson County. Settlement, cracked walls, sticking doors and sloping floors assessed and fixed. Call (205) 518-9789."
 order: 0
 ---
 

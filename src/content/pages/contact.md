@@ -1,12 +1,12 @@
 ---
 title: "Contact Birmingham Foundation Repair"
 seoTitle: "Contact Us | Birmingham Foundation Repair, AL"
-description: "Contact Birmingham Foundation Repair for a free inspection. Call (205) 555-0100 for foundation, crawl space and basement work across Jefferson and Shelby Counties."
+description: "Contact Birmingham Foundation Repair for a free inspection. Call (205) 518-9789 for foundation, crawl space and basement work across Jefferson and Shelby Counties."
 ---
 
 ## Contact Us
 
-Phone: (205) 555-0100  
+Phone: (205) 518-9789  
 Email: info@bhamfoundationrepair.com
 
 ## Getting in Touch

@@ -1,7 +1,7 @@
 ---
 title: "Foundation Wall Repair in Birmingham, AL"
 seoTitle: "Foundation Wall Repair Birmingham, AL | Bowing & Cracked Walls"
-description: "Foundation wall repair in Birmingham, AL. Bowing block walls, horizontal cracks and lateral soil pressure fixed with anchors and carbon fiber. Call (205) 555-0100."
+description: "Foundation wall repair in Birmingham, AL. Bowing block walls, horizontal cracks and lateral soil pressure fixed with anchors and carbon fiber. Call (205) 518-9789."
 order: 6
 ---
 

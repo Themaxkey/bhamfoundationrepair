@@ -1,7 +1,7 @@
 ---
 title: "Foundation Repair in Pelham, AL"
 seoTitle: "Foundation Repair Pelham, AL | Bham Foundation Repair"
-description: "Foundation repair and crawl space work in Pelham, AL. Slab settlement, hillside drainage and Shelby County ground conditions. Call (205) 555-0100."
+description: "Foundation repair and crawl space work in Pelham, AL. Slab settlement, hillside drainage and Shelby County ground conditions. Call (205) 518-9789."
 town: "Pelham"
 ---
 
