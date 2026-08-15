@@ -8,8 +8,11 @@
  * The phone number is live: a Twilio 205 number pointing at a Studio flow.
  * It appears in the header, the sticky mobile call bar, the JSON-LD and the
  * meta description of every page, so if it ever changes it must change HERE
- * and in the `description:` front matter of src/content/**/*.md, which repeat
- * it as plain text for the search snippet.
+ * and in the `description:` front matter of the markdown files under
+ * src/content, which repeat it as plain text for the search snippet.
+ *
+ * Do not write a glob with a star-slash in it inside this comment block — it
+ * terminates the comment early and the build fails with Unexpected "*".
  */
 
 export const site = {
