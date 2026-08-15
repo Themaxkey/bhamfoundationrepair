@@ -1,0 +1,106 @@
+---
+import { getCollection, render } from 'astro:content';
+import { site } from '../../site.config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import TownGrid from '../components/TownGrid.astro';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  const towns    = await getCollection('towns');
+  const pages    = await getCollection('pages');
+
+  return [
+    ...services.map(e => ({ params: { slug: e.id }, props: { entry: e, kind: 'service' as const } })),
+    ...towns.map(e    => ({ params: { slug: e.id }, props: { entry: e, kind: 'town'    as const } })),
+    ...pages.filter(e => e.id !== 'home')
+            .map(e    => ({ params: { slug: e.id }, props: { entry: e, kind: 'page'    as const } })),
+  ];
+}
+
+const { entry, kind } = Astro.props;
+const { Content } = await render(entry);
+const d: any = entry.data;
+
+const serviceName = kind === 'service'
+  ? site.services.find(s => s.slug === entry.id)?.name
+  : undefined;
+const townName = kind === 'town' ? d.town : undefined;
+
+const showServices = entry.id === 'services';
+const showTowns    = entry.id === 'service-area';
+---
+<BaseLayout
+  seoTitle={d.seoTitle}
+  description={d.description}
+  pageType={kind}
+  serviceName={serviceName}
+  townName={townName}
+  noindex={d.noindex ?? false}
+>
+  <div class="wrap page-head">
+    <h1>{d.title}</h1>
+  </div>
+
+  {d.hero && (
+    <div class="wrap">
+      <figure class="page-hero">
+        <img src={`/images/${d.hero}`} alt={d.heroAlt ?? d.title} width="1120" height="560" loading="eager" fetchpriority="high" />
+        {d.heroCaption && <figcaption>{d.heroCaption}</figcaption>}
+      </figure>
+    </div>
+  )}
+
+  {showServices && <div class="wrap"><ServiceGrid /></div>}
+  {showTowns    && <div class="wrap"><TownGrid /></div>}
+
+  <div class="wrap">
+    <article class="prose"><Content /></article>
+  </div>
+
+  {kind === 'town' && (
+    <section class="section alt">
+      <div class="wrap">
+        <h2>{site.trade.nounPlural.replace(/^\w/, (c) => c.toUpperCase())} we offer in {townName}</h2>
+        <ServiceGrid />
+      </div>
+    </section>
+  )}
+
+  {kind === 'service' && (
+    <section class="section alt">
+      <div class="wrap">
+        <h2>Where we work</h2>
+        <TownGrid />
+      </div>
+    </section>
+  )}
+
+
+  {entry.id === 'contact' && (
+    <div class="wrap">
+      <form class="lead-form" method="POST" action="/api/contact">
+        <h2>Request a quote</h2>
+        <label>Name<input type="text" name="name" required autocomplete="name" /></label>
+        <label>Phone<input type="tel" name="phone" autocomplete="tel" /></label>
+        <label>Email<input type="email" name="email" autocomplete="email" /></label>
+        <label>What do you need done?<textarea name="message" rows="4"></textarea></label>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />
+        <button type="submit">Send request</button>
+        <p class="form-note">{site.legal.disclosure}</p>
+      </form>
+    </div>
+  )}
+
+  <section class="section">
+    <div class="wrap">
+      <div class="callout">
+        <p><strong>Need {site.trade.noun} in {site.location.city}?</strong></p>
+        <p>
+          Call <a href={`tel:${site.business.phoneRaw}`}>{site.business.phone}</a> or
+          <a href="/contact/"> request a quote online</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

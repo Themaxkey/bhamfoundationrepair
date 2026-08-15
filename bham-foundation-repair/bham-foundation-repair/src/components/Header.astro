@@ -1,0 +1,104 @@
+---
+import { site } from '../../site.config';
+const path = Astro.url.pathname;
+const isOn = (href: string) => path === href;
+const inServices = site.services.some(s => path === `/${s.slug}/`) || path === '/services/';
+const inTowns    = site.towns.some(t => path === `/${t.slug}/`) || path === '/service-area/';
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <img src={site.brand.logo} alt={`${site.business.name} logo`} width="46" height="46" />
+      <span>
+        <strong>{site.business.name}</strong>
+        <span>{site.location.city}, {site.location.stateAbbr}</span>
+      </span>
+    </a>
+
+    <nav class="site-nav" aria-label="Main">
+      <a href="/" aria-current={isOn('/') ? 'page' : undefined}>Home</a>
+
+      <div class="has-drop">
+        <a href="/services/" aria-current={inServices ? 'page' : undefined}>
+          Services <span class="caret" aria-hidden="true"></span>
+        </a>
+        <div class="drop">
+          <a href="/services/"><strong>All services</strong></a>
+          {site.services.map(s => <a href={`/${s.slug}/`}>{s.name}</a>)}
+        </div>
+      </div>
+
+      <div class="has-drop">
+        <a href="/service-area/" aria-current={inTowns ? 'page' : undefined}>
+          Service Area <span class="caret" aria-hidden="true"></span>
+        </a>
+        <div class="drop drop-2col">
+          <a href="/service-area/"><strong>All areas served</strong></a>
+          {site.towns.map(t => <a href={`/${t.slug}/`}>{t.name}, {site.location.stateAbbr}</a>)}
+        </div>
+      </div>
+
+      <a href="/faq/" aria-current={isOn('/faq/') ? 'page' : undefined}>FAQ</a>
+      <a href="/about/" aria-current={isOn('/about/') ? 'page' : undefined}>About</a>
+      <a href="/contact/" aria-current={isOn('/contact/') ? 'page' : undefined}>Contact</a>
+    </nav>
+
+    <a class="tel-btn" href={`tel:${site.business.phoneRaw}`}>{site.business.phone}</a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+      <span class="bars" aria-hidden="true"></span>
+      <span class="menu-label">Menu</span>
+    </button>
+  </div>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile" hidden>
+    <div class="wrap">
+      <a href="/">Home</a>
+
+      <details open={inServices}>
+        <summary>Services</summary>
+        <a href="/services/">All services</a>
+        {site.services.map(s => <a href={`/${s.slug}/`}>{s.name}</a>)}
+      </details>
+
+      <details open={inTowns}>
+        <summary>Service Area</summary>
+        <a href="/service-area/">All areas served</a>
+        {site.towns.map(t => <a href={`/${t.slug}/`}>{t.name}, {site.location.stateAbbr}</a>)}
+      </details>
+
+      <a href="/faq/">FAQ</a>
+      <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const btn  = document.querySelector('.menu-toggle');
+  const menu = document.getElementById('mobile-nav');
+
+  function setOpen(open: boolean) {
+    if (!btn || !menu) return;
+    btn.setAttribute('aria-expanded', String(open));
+    menu.hidden = !open;
+  }
+
+  btn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    setOpen(btn.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // tapping the page, or following a link, closes it
+  document.addEventListener('click', (e) => {
+    if (!menu || menu.hidden) return;
+    const t = e.target as Node;
+    if (!menu.contains(t) && t !== btn) setOpen(false);
+  });
+  menu?.addEventListener('click', (e) => {
+    if ((e.target as HTMLElement).closest('a')) setOpen(false);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu && !menu.hidden) { setOpen(false); btn?.focus(); }
+  });
+</script>

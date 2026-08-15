@@ -1,0 +1,35 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bham-foundation-repair",
+  "main": "src/server/worker.ts",
+  "compatibility_date": "2026-08-01",
+
+  // Non-secret runtime values for the contact form and voicemail notifications.
+  //
+  // These MUST be declared here, not only in the Cloudflare dashboard. Every
+  // push runs `wrangler deploy`, which replaces the Worker's plain-text vars
+  // with whatever this file declares — so a variable added only in the
+  // dashboard is silently wiped by the next build.
+  //
+  // RESEND_KEY is the exception: it is a dashboard secret, survives every
+  // deploy, and must never be committed.
+  //
+  // LEAD_TO is set to the owner's inbox for now. Once an operator is signed,
+  // change it to route leads straight to them.
+  "vars": {
+    "LEAD_TO": "maxwellhkey@gmail.com",
+    "LEAD_FROM": "Birmingham Foundation Repair <leads@bhamfoundationrepair.com>",
+    "VOICEMAIL_TOKEN": "LsAZtVlpZxdYFe8lrpggJvvxBMoP36aTMptGHJW1"
+  },
+
+  // Astro builds static HTML into ./dist. Cloudflare serves those files
+  // directly from its edge — static asset requests are free and unlimited.
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+
+  "observability": { "enabled": true }
+}

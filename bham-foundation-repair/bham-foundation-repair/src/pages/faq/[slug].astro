@@ -1,0 +1,37 @@
+---
+import { getCollection, render } from 'astro:content';
+import { site } from '../../../site.config';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const faqs = await getCollection('faqs');
+  return faqs.map(e => ({ params: { slug: e.id }, props: { entry: e } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d: any = entry.data;
+const faqBlock = d.question ? [{ question: d.question, answer: d.description }] : undefined;
+---
+<BaseLayout seoTitle={d.seoTitle} description={d.description} pageType="faq" faq={faqBlock}>
+  <div class="wrap page-head">
+    <nav aria-label="Breadcrumb" style="font-size:.9rem;color:var(--muted);">
+      <a href="/">Home</a> &rsaquo; <a href="/faq/">FAQ</a>
+    </nav>
+    <h1>{d.title}</h1>
+  </div>
+  {d.hero && (
+    <div class="wrap">
+      <figure class="page-hero">
+        <img src={`/images/${d.hero}`} alt={d.heroAlt ?? d.title} width="1120" height="560" loading="lazy" />
+      </figure>
+    </div>
+  )}
+
+  <div class="wrap">
+    <article class="prose"><Content /></article>
+    <div class="callout">
+      <p>Still have a question? Call <a href={`tel:${site.business.phoneRaw}`}>{site.business.phone}</a>.</p>
+    </div>
+  </div>
+</BaseLayout>
