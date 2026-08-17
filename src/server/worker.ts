@@ -36,6 +36,23 @@ export default {
   },
 } satisfies ExportedHandler<Env>;
 
+/**
+ * The business name, for email subject lines.
+ *
+ * Both sites send from the SAME Resend-verified sender — see LEAD_FROM in
+ * wrangler.jsonc — because the free tier allows one domain only. The sender
+ * address therefore does not
+ * distinguish them and neither did the old subjects — "Voicemail from +1..."
+ * was identical whichever site it came from, so the two businesses' mail could
+ * not be told apart or filtered in Gmail. LEAD_FROM already carries the right
+ * display name per site, so parse it from there rather than hardcoding a
+ * string that will be forgotten when this template is cloned again.
+ */
+function businessName(env: Env): string {
+  const m = (env.LEAD_FROM ?? '').match(/^\s*(.+?)\s*</);
+  return m ? m[1] : 'Website';
+}
+
 async function handleLead(request: Request, env: Env, url: URL): Promise<Response> {
   try {
     const form    = await request.formData();
@@ -77,7 +94,7 @@ async function handleLead(request: Request, env: Env, url: URL): Promise<Respons
         from: env.LEAD_FROM,
         to: [env.LEAD_TO],
         reply_to: email || undefined,
-        subject: `New website lead — ${name}`,
+        subject: `[${businessName(env)}] New website lead — ${name}`,
         text: body,
       }),
     });
@@ -157,7 +174,7 @@ async function handleVoicemail(request: Request, env: Env, url: URL): Promise<Re
       body: JSON.stringify({
         from: env.LEAD_FROM,
         to: [env.LEAD_TO],
-        subject: `Voicemail from ${from}`,
+        subject: `[${businessName(env)}] Voicemail from ${from}`,
         text: body,
       }),
     });
