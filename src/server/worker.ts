@@ -32,6 +32,11 @@ export default {
       return handleVoicemail(request, env, url);
     }
 
+    if (url.pathname === '/api/missed-call') {
+      if (request.method !== 'POST') return new Response('Method not allowed', { status: 405 });
+      return handleMissedCall(request, env, url);
+    }
+
     return env.ASSETS.fetch(request);
   },
 } satisfies ExportedHandler<Env>;
@@ -181,6 +186,76 @@ async function handleVoicemail(request: Request, env: Env, url: URL): Promise<Re
 
     if (!res.ok) {
       console.error('voicemail delivery failed', res.status, await res.text());
+      return new Response('Could not send', { status: 502 });
+    }
+    return new Response('ok');
+  } catch (err) {
+    console.error(err);
+    return new Response('Unexpected error.', { status: 500 });
+  }
+}
+
+/**
+ * Someone rang and hung up BEFORE the call connected and before voicemail.
+ *
+ * This is the commonest way to lose a job and it used to be completely
+ * invisible: the Studio flow's "Caller Hung Up" branch went nowhere, so an
+ * abandoned call left no trace outside an execution log nobody reads. One real
+ * prospect rang three times over six days, gave up after about six seconds
+ * each time, and we only found out by going looking.
+ *
+ * A hang-up is not a failed call. It is a warm lead with a phone number
+ * attached, and it is worth exactly as much as a voicemail — arguably more,
+ * because they tried repeatedly.
+ */
+async function handleMissedCall(request: Request, env: Env, url: URL): Promise<Response> {
+  try {
+    if (!env.VOICEMAIL_TOKEN || url.searchParams.get('k') !== env.VOICEMAIL_TOKEN) {
+      return new Response('Forbidden', { status: 403 });
+    }
+    if (!env.RESEND_KEY || !env.LEAD_TO || !env.LEAD_FROM) {
+      console.error('missed call received but delivery is not configured');
+      return new Response('Not configured', { status: 503 });
+    }
+
+    const type = request.headers.get('content-type') ?? '';
+    let data: Record<string, string> = {};
+    if (type.includes('application/json')) {
+      data = (await request.json()) as Record<string, string>;
+    } else {
+      const form = await request.formData();
+      for (const [k, v] of form.entries()) data[k] = String(v);
+    }
+
+    const from    = (data.from ?? '').trim() || 'unknown number';
+    const seconds = (data.seconds ?? '').trim();
+
+    const body = ([
+      `Someone rang the website number and hung up before it connected.`,
+      ``,
+      `From:     ${from}`,
+      seconds ? `They waited: ${seconds} seconds` : null,
+      ``,
+      `They did NOT leave a voicemail — they gave up while it was still ringing.`,
+      `That usually means they will try a competitor next, so call them back now`,
+      `rather than later.`,
+      ``,
+      `Call them back on ${from}.`,
+    ].filter((line) => line !== null) as string[]).join('\n');
+
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${env.RESEND_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: env.LEAD_FROM,
+        to: [env.LEAD_TO],
+        subject: `[${businessName(env)}] MISSED CALL from ${from} — call back`,
+        text: body,
+      }),
+    });
+
+    if (!res.ok) {
+      console.error('missed-call delivery failed', res.status, await res.text());
       return new Response('Could not send', { status: 502 });
     }
     return new Response('ok');
