@@ -229,6 +229,19 @@ async function handleMissedCall(request: Request, env: Env, url: URL): Promise<R
 
     const from    = (data.from ?? '').trim() || 'unknown number';
     const seconds = (data.seconds ?? '').trim();
+    const status  = (data.status ?? '').trim().toLowerCase();
+
+    // Studio fires "Caller Hung Up" whenever the CALLER ends the call — including
+    // at the end of a conversation that went perfectly well. Without this guard
+    // every successful job call would be followed by an email shouting MISSED
+    // CALL, and alerts you learn to ignore are worse than no alerts at all.
+    //
+    // DialCallStatus tells the two apart: 'completed' means the outbound leg was
+    // answered and a real conversation happened. Anything else — no-answer, busy,
+    // failed, or empty because the dial never got that far — is a genuine miss.
+    if (status === 'completed') {
+      return new Response('ok (connected call, no alert sent)');
+    }
 
     const body = ([
       `Someone rang the website number and hung up before it connected.`,
