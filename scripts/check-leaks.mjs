@@ -63,14 +63,26 @@ for (const f of files) {
     // Note the endings are spelled out rather than using \w*: "organism" and
     // "realistic" are spelled identically in both dialects, and a lazy
     // organis\w* flags them both. Only the -ise/-isation forms are British.
+    // Two classes of miss found in testing, both fixed below:
+    //   compounds — \bmetre\b never matches inside "millimetres"
+    //   -our words — colour was listed, favour/behaviour/honour were not
     const brit = new RegExp(
       '\\b(' +
-      'enquir(y|ies|e|ed|ing)|travelling|travelled|' +
-      'colour(s|ed|ing|ful)?|centre(s)?|licence(s)?|' +
+      // compounds first — a bare \bmetre\b never matches inside "millimetres"
+      '(milli|centi|kilo)?metre(s)?|' +
+      // -our family — colour alone was listed and favourable slipped straight past
+      '(fav|behavi|hon|lab|vap|end|harb|neighb|rig|arm|clam)our(s|ed|ing|able|ite|hood)?|' +
+      // -ise / -isation, spelled out so "organism" and "realistic" are not flagged
       'organis(e|es|ed|ing|ation|ations)|realis(e|es|ed|ing)|' +
       'recognis(e|es|ed|ing)|specialis(e|es|ed|ing|ation)|' +
-      'whilst|amongst|metre(s)?|neighbour(s|hood|hoods)?|' +
-      'apologis(e|es|ed)|analys(e|es|ed)|catalogue(s)?|programme(s)?' +
+      'apologis(e|es|ed)|analys(e|es|ed)|' +
+      // everything else
+      'enquir(y|ies|e|ed|ing)|travelling|travelled|cancelling|' +
+      'colour(s|ed|ing|ful)?|centre(s)?|licence(s)?|defence|offence|' +
+      'whilst|amongst|catalogue(s)?|programme(s)?|storey(s)?|' +
+      'mould(s|y|ing)?|draught(s|y)?|kerb(s)?|tyre(s)?|grey|' +
+      'fulfil|instalment(s)?|skilful|enrol|practise(d|s)?|' +
+      'litre(s)?|fibre(s)?|theatre(s)?|aluminium' +
       ')\\b', 'i');
     const m = line.match(brit);
     if (m) problems.push(`${at}  British spelling "${m[0]}" — this is a US site`);
