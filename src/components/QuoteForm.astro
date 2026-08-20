@@ -1,0 +1,62 @@
+---
+/**
+ * The short lead form that sits in the hero.
+ *
+ * THREE FIELDS, AND THAT IS DELIBERATE. Measured form benchmarks put three
+ * fields at roughly 25% conversion, four at 23%, five at 20% and seven at 12%
+ * — and the fall accelerates rather than being linear. Every field you add
+ * here costs real leads, so do not add a last name, a required email, or a
+ * mandatory message however tempting it looks.
+ *
+ * The message box is optional on purpose. Required free-text is the single
+ * worst field to insist on, because it is the only one that asks the visitor
+ * to compose rather than recall. Left optional it costs nothing and the people
+ * who do fill it in hand you a far better first phone call.
+ *
+ * The worker accepts name plus EITHER phone or email, so requiring phone alone
+ * is valid server-side. `website` is the honeypot — real people never see it,
+ * bots fill it, and the worker silently discards anything that has it set.
+ */
+import { site } from '../../site.config';
+
+interface Props {
+  heading?: string;
+  compact?: boolean;
+}
+const { heading = 'Get a free inspection', compact = false } = Astro.props;
+
+/**
+ * Placeholder built from the real number's area code, never typed by hand.
+ * A hand-typed example number would keep this market's area code after the
+ * template is cloned into the next one, and nobody would notice for months.
+ */
+const areaCode = (site.business.phone.match(/\d{3}/) ?? ['000'])[0];
+const phonePlaceholder = `(${areaCode}) 000-0000`;
+---
+<form class:list={['quote-form', compact && 'compact']} method="POST" action="/api/contact">
+  <h2>{heading}</h2>
+  <p class="qf-sub">Tell us where you are and what you are seeing. No charge, no obligation.</p>
+
+  <label>
+    <span>Name</span>
+    <input type="text" name="name" required autocomplete="name" placeholder="Your name" />
+  </label>
+
+  <label>
+    <span>Phone</span>
+    <input type="tel" name="phone" required autocomplete="tel" placeholder={phonePlaceholder} />
+  </label>
+
+  <label>
+    <span>What are you seeing? <em>optional</em></span>
+    <textarea name="message" rows="2" placeholder="Cracks in the brick, sloping floor, damp crawl space…"></textarea>
+  </label>
+
+  <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />
+
+  <button type="submit">Request my free inspection</button>
+
+  <p class="qf-note">
+    Prefer to talk? Call <a href={`tel:${site.business.phoneRaw}`}>{site.business.phone}</a>.
+  </p>
+</form>

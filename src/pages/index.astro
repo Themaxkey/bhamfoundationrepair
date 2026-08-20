@@ -4,6 +4,7 @@ import { site } from '../../site.config';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServiceGrid from '../components/ServiceGrid.astro';
 import TownGrid from '../components/TownGrid.astro';
+import QuoteForm from '../components/QuoteForm.astro';
 
 const entry = await getEntry('pages', 'home');
 if (!entry) throw new Error('Missing src/content/pages/home.md');
@@ -11,14 +12,16 @@ const { Content } = await render(entry);
 const d = entry.data;
 ---
 <BaseLayout seoTitle={d.seoTitle} description={d.description} pageType="home">
-  <section class="hero">
-    <div class="wrap">
-      <h1>{d.title}</h1>
-      <p>{d.tagline ?? d.description}</p>
-      <div class="cta">
-        <a class="cta-primary" href={`tel:${site.business.phoneRaw}`}>Call {site.business.phone}</a>
-        <a class="cta-ghost" href="/contact/">Request a quote</a>
+  <section class="hero has-form">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>{d.title}</h1>
+        <p>{d.tagline ?? d.description}</p>
+        <div class="cta">
+          <a class="cta-primary" href={`tel:${site.business.phoneRaw}`}>Call {site.business.phone}</a>
+        </div>
       </div>
+      <QuoteForm />
     </div>
   </section>
 

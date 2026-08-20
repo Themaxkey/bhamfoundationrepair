@@ -54,8 +54,28 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <body>
     <Header />
     <main>
+      {/*
+        The worker redirects to /contact/?sent=1 on a successful submission.
+        Nothing read that flag until now, so a person who filled in the form was
+        returned to a page that looked exactly like the one they had just
+        submitted — no thank you, no acknowledgement. A fair number would have
+        concluded it was broken. The site is static, so the flag has to be read
+        client-side; the banner ships hidden and is revealed on load.
+      */}
+      <div class="wrap">
+        <div class="sent-banner" id="sent-banner" role="status">
+          <strong>Thanks — we have got that.</strong>
+          <p>We will call you back shortly. If it is urgent, ring us and we will pick up.</p>
+        </div>
+      </div>
       <slot />
     </main>
+    <script is:inline>
+      if (location.search.indexOf('sent=1') !== -1) {
+        var b = document.getElementById('sent-banner');
+        if (b) { b.classList.add('show'); b.scrollIntoView({ block: 'center' }); }
+      }
+    </script>
     <Footer />
     <CallBar />
   </body>

@@ -177,6 +177,64 @@ img { max-width: 100%; height: auto; display: block; }
 .cta-primary:hover { background: var(--red-dk); }
 .cta-ghost   { border: 2px solid rgba(255,255,255,.6); color: #fff; }
 
+/* ---------- hero lead form ----------
+   Two columns on desktop: copy left, form right. On mobile the ORDER MATTERS —
+   the call button comes before the form, because someone on a phone who has
+   decided to act will tap to call, and making them scroll past a form to reach
+   it costs the easiest conversion on the site. */
+.hero-grid { display: grid; gap: 2rem; align-items: start; }
+@media (min-width: 900px) {
+  .hero-grid { grid-template-columns: 1fr 22rem; gap: 3rem; }
+  .hero.has-form { padding: 3rem 0; }
+}
+.hero-copy p { margin-bottom: 0; }
+
+.quote-form {
+  background: #fff; border-radius: var(--radius); padding: 1.4rem 1.3rem 1.2rem;
+  box-shadow: 0 6px 24px rgba(0,0,0,.18);
+}
+.quote-form h2 { margin: 0 0 .25rem; font-size: 1.18rem; color: var(--ink); }
+.quote-form .qf-sub { margin: 0 0 1rem; font-size: .85rem; color: var(--muted); }
+.quote-form label { display: block; margin-bottom: .7rem; }
+.quote-form label > span {
+  display: block; font-size: .82rem; font-weight: 700; color: var(--ink); margin-bottom: .25rem;
+}
+.quote-form label > span em { font-weight: 400; font-style: normal; color: var(--muted); }
+.quote-form input, .quote-form textarea {
+  display: block; width: 100%; padding: .6rem .7rem;
+  border: 1px solid var(--line); border-radius: var(--radius);
+  font: inherit; font-size: .95rem; color: var(--body); background: #fff;
+}
+.quote-form textarea { resize: vertical; }
+.quote-form input:focus, .quote-form textarea:focus {
+  outline: 2px solid var(--red); outline-offset: 1px; border-color: var(--red);
+}
+/* Same red as the call button — this and the phone are the two things we want
+   pressed, so they should look like the same class of action. */
+.quote-form button {
+  width: 100%; background: var(--red); color: #fff; border: 0; border-radius: var(--radius);
+  padding: .8rem 1rem; font: inherit; font-weight: 800; font-size: 1rem; cursor: pointer;
+  margin-top: .3rem;
+}
+.quote-form button:hover { background: var(--red-dk); }
+.quote-form .qf-note { margin: .8rem 0 0; font-size: .82rem; color: var(--muted); text-align: center; }
+.quote-form .qf-note a { color: var(--red-dk); font-weight: 700; }
+.quote-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
+
+/* ---------- submission confirmation ----------
+   The worker redirects to /contact/?sent=1 after a successful send. Nothing
+   read that flag until now, so every person who submitted was bounced to a
+   page that looked identical to the one they had just filled in — no thank
+   you, no confirmation. Plenty would have assumed it failed and given up. */
+.sent-banner {
+  display: none; background: #dcfce7; border-left: 4px solid #16a34a;
+  padding: .9rem 1.1rem; margin: 1.25rem 0 0; border-radius: 0 var(--radius) var(--radius) 0;
+}
+.sent-banner strong { display: block; color: #14532d; }
+.sent-banner p { margin: .2rem 0 0; font-size: .92rem; color: #166534; }
+.sent-banner.show { display: block; }
+
+
 /* ---------- content ---------- */
 main { padding-bottom: 3rem; }
 .prose { max-width: 74ch; padding-top: 2.25rem; }
