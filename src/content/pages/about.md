@@ -2,6 +2,8 @@
 title: "About Birmingham Foundation Repair"
 seoTitle: "About Us | Birmingham Foundation Repair, AL"
 description: "Who we are, how we work, and how requests made through this site reach local licensed foundation and crawl space contractors in Birmingham, AL."
+hero: "alabama-theatre-birmingham-al.jpg"
+heroAlt: "The neon marquee of the Alabama Theatre on Third Avenue North in downtown Birmingham"
 ---
 
 ## How This Site Works

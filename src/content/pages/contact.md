@@ -2,6 +2,8 @@
 title: "Contact Birmingham Foundation Repair"
 seoTitle: "Contact Us | Birmingham Foundation Repair, AL"
 description: "Contact Birmingham Foundation Repair for a free inspection. Call (205) 518-9789 for foundation, crawl space and basement work across Jefferson and Shelby Counties."
+hero: "alabama-theatre-birmingham-al.jpg"
+heroAlt: "The neon marquee of the Alabama Theatre on Third Avenue North in downtown Birmingham"
 ---
 
 ## Contact Us

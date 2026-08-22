@@ -2,6 +2,8 @@
 title: "Birmingham Foundation Repair"
 seoTitle: "Foundation Repair Birmingham, AL | Free Inspection"
 description: "Foundation repair, crawl space encapsulation and basement waterproofing in Birmingham, AL and Jefferson County. Free inspection. Call (205) 518-9789."
+hero: "birmingham-al-railroad-park-skyline.jpg"
+heroAlt: "The Birmingham, Alabama skyline at sunset seen across the lake at Railroad Park"
 tagline: "Settlement, cracked walls, sagging floors and damp crawl spaces — assessed properly and fixed for good, across Birmingham and Jefferson County."
 ---
 
