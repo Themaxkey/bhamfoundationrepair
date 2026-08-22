@@ -12,7 +12,24 @@ const { Content } = await render(entry);
 const d = entry.data;
 ---
 <BaseLayout seoTitle={d.seoTitle} description={d.description} pageType="home">
-  <section class="hero has-form">
+  {/*
+    The home hero photo is the BACKGROUND of this band, with the headline and
+    the form sitting on top of it, rather than a separate block underneath.
+    A scrim of the brand color goes over it so the white type stays readable —
+    see .hero.has-photo::before in global.css for the measured numbers.
+    heroCaption is not rendered here; there is nowhere sensible to put a caption
+    on a backdrop. Interior pages still use it via the .page-hero figure.
+  */}
+  <section class:list={['hero', 'has-form', d.hero && 'has-photo']}>
+    {d.hero && (
+      <img
+        class="hero-bg"
+        src={`/images/${d.hero}`}
+        alt={d.heroAlt ?? ''}
+        width="1600" height="800"
+        loading="eager" fetchpriority="high"
+      />
+    )}
     <div class="wrap hero-grid">
       <div class="hero-copy">
         <h1>{d.title}</h1>
@@ -24,15 +41,6 @@ const d = entry.data;
       <QuoteForm />
     </div>
   </section>
-
-  {d.hero && (
-    <div class="wrap">
-      <figure class="page-hero">
-        <img src={`/images/${d.hero}`} alt={d.heroAlt ?? d.title} width="1120" height="560" loading="eager" fetchpriority="high" />
-        {d.heroCaption && <figcaption>{d.heroCaption}</figcaption>}
-      </figure>
-    </div>
-  )}
 
   <div class="wrap">
     <article class="prose"><Content /></article>
