@@ -2,6 +2,8 @@
 title: "Foundation Crack Repair in Birmingham, AL"
 seoTitle: "Foundation Crack Repair Birmingham, AL | Sealing & Injection"
 description: "Foundation crack repair in Birmingham, AL. Epoxy and polyurethane injection for leaking and structural cracks, plus honest advice on which cracks need nothing."
+hero: "foundation-crack-repair-stair-step-birmingham-al.jpg"
+heroAlt: "Stair-step crack running through the mortar joints of a brick wall on a Birmingham home"
 order: 7
 ---
 

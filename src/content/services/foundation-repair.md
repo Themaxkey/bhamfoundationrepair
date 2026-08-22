@@ -2,6 +2,8 @@
 title: "Foundation Repair in Birmingham, AL"
 seoTitle: "Foundation Repair in Birmingham, AL | Settling & Cracks"
 description: "Foundation repair in Birmingham, AL and Jefferson County. Settlement, cracked walls, sticking doors and sloping floors assessed and fixed. Call (205) 518-9789."
+hero: "foundation-repair-pier-birmingham-al.jpg"
+heroAlt: "Steel push pier bracket and hydraulic ram installed against a house footing in Birmingham, Alabama"
 order: 0
 ---
 

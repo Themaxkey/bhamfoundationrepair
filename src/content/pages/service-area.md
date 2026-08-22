@@ -2,6 +2,8 @@
 title: "Service Area — Birmingham and Central Alabama"
 seoTitle: "Service Area | Birmingham Foundation Repair, AL"
 description: "Foundation repair and crawl space services across Birmingham, Jefferson County and north Shelby County, including Hoover, Homewood, Vestavia Hills and Alabaster."
+hero: "birmingham-al-hillside-street-brick-homes.jpg"
+heroAlt: "Brick homes stepped into a wooded hillside street in suburban Birmingham, Alabama"
 ---
 
 We cover Birmingham and the surrounding metro, which in practice means most of Jefferson County and the northern part of Shelby County. The list below is where we work most often; if your address is not on it, call and ask, because we regularly go beyond it.

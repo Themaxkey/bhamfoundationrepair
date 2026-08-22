@@ -2,6 +2,8 @@
 title: "Foundation Inspection in Birmingham, AL"
 seoTitle: "Foundation Inspection Birmingham, AL | Free Assessment"
 description: "Foundation inspections in Birmingham, AL. Find out whether a crack is structural or cosmetic before you buy, sell or spend. Call (205) 518-9789."
+hero: "foundation-inspection-birmingham-al.jpg"
+heroAlt: "Level and laser being used to measure movement in a cracked foundation wall in Birmingham"
 order: 1
 ---
 
