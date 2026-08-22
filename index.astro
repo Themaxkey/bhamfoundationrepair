@@ -1,0 +1,62 @@
+---
+import { getEntry, render } from 'astro:content';
+import { site } from '../../site.config';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceGrid from '../components/ServiceGrid.astro';
+import TownGrid from '../components/TownGrid.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+
+const entry = await getEntry('pages', 'home');
+if (!entry) throw new Error('Missing src/content/pages/home.md');
+const { Content } = await render(entry);
+const d = entry.data;
+---
+<BaseLayout seoTitle={d.seoTitle} description={d.description} pageType="home">
+  {/*
+    The home hero photo is the BACKGROUND of this band, with the headline and
+    the form sitting on top of it, rather than a separate block underneath.
+    A scrim of the brand color goes over it so the white type stays readable —
+    see .hero.has-photo::before in global.css for the measured numbers.
+    heroCaption is not rendered here; there is nowhere sensible to put a caption
+    on a backdrop. Interior pages still use it via the .page-hero figure.
+  */}
+  <section class:list={['hero', 'has-form', d.hero && 'has-photo']}>
+    {d.hero && (
+      <img
+        class="hero-bg"
+        src={`/images/${d.hero}`}
+        alt={d.heroAlt ?? ''}
+        width="1600" height="800"
+        loading="eager" fetchpriority="high"
+      />
+    )}
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>{d.title}</h1>
+        <p>{d.tagline ?? d.description}</p>
+        <div class="cta">
+          <a class="cta-primary" href={`tel:${site.business.phoneRaw}`}>Call {site.business.phone}</a>
+        </div>
+      </div>
+      <QuoteForm />
+    </div>
+  </section>
+
+  <div class="wrap">
+    <article class="prose"><Content /></article>
+  </div>
+
+  <section class="section alt">
+    <div class="wrap">
+      <h2>Our {site.trade.nounPlural} in {site.location.city}</h2>
+      <ServiceGrid />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2>Areas we serve around {site.location.county}</h2>
+      <TownGrid />
+    </div>
+  </section>
+</BaseLayout>
