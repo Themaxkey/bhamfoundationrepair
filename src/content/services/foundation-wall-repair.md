@@ -19,7 +19,7 @@ Vertical cracks are more often settlement or shrinkage than pressure.
 
 ## What Pushes a Wall In
 
-Water is nearly always involved. Saturated clay behind a wall exerts far more pressure than dry clay, both from the weight of the water and because our clay expands as it wets. Add a blocked or absent drain, guttering that discharges next to the wall, or a grade that falls toward the house, and the load on that wall goes up substantially every time it rains.
+Water is nearly always involved. Saturated clay behind a wall exerts far more pressure than dry clay, both from the weight of the water and because our clay expands as it wets. Add a blocked or absent drain, gutters that discharge next to the wall, or a grade that falls toward the house, and the load on that wall goes up substantially every time it rains.
 
 Frost is a minor factor in central Alabama compared with further north, but heavy vehicles parked close to a wall and tree roots are both worth ruling out.
 

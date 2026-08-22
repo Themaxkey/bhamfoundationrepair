@@ -16,6 +16,12 @@
  * The worker accepts name plus EITHER phone or email, so requiring phone alone
  * is valid server-side. `website` is the honeypot — real people never see it,
  * bots fill it, and the worker silently discards anything that has it set.
+ *
+ * NOTHING TRADE-SPECIFIC BELONGS IN THIS FILE. The wording all comes from
+ * site.config.ts, because this component gets copied verbatim into the next
+ * market and a hardcoded "cracks in the brick" would read as nonsense on a
+ * tree service. Fallbacks are kept so an older config without a `form` block
+ * still renders something sane rather than throwing at build time.
  */
 import { site } from '../../site.config';
 
@@ -23,7 +29,12 @@ interface Props {
   heading?: string;
   compact?: boolean;
 }
-const { heading = 'Get a free inspection', compact = false } = Astro.props;
+
+const copy = (site as any).form ?? {};
+const {
+  heading = copy.heading ?? 'Get a free quote',
+  compact = false,
+} = Astro.props;
 
 /**
  * Placeholder built from the real number's area code, never typed by hand.
@@ -35,7 +46,7 @@ const phonePlaceholder = `(${areaCode}) 000-0000`;
 ---
 <form class:list={['quote-form', compact && 'compact']} method="POST" action="/api/contact">
   <h2>{heading}</h2>
-  <p class="qf-sub">Tell us where you are and what you are seeing. No charge, no obligation.</p>
+  <p class="qf-sub">{copy.sub ?? 'Tell us where you are and what you need. No charge, no obligation.'}</p>
 
   <label>
     <span>Name</span>
@@ -49,12 +60,12 @@ const phonePlaceholder = `(${areaCode}) 000-0000`;
 
   <label>
     <span>What are you seeing? <em>optional</em></span>
-    <textarea name="message" rows="2" placeholder="Cracks in the brick, sloping floor, damp crawl space…"></textarea>
+    <textarea name="message" rows="2" placeholder={copy.placeholder ?? ''}></textarea>
   </label>
 
   <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp" />
 
-  <button type="submit">Request my free inspection</button>
+  <button type="submit">{copy.button ?? 'Send'}</button>
 
   <p class="qf-note">
     Prefer to talk? Call <a href={`tel:${site.business.phoneRaw}`}>{site.business.phone}</a>.

@@ -33,7 +33,7 @@ Start outside, because it is cheaper and it addresses cause rather than effect. 
 
 Interior drainage is the standard next step. A channel is cut around the interior perimeter of the slab, a perforated pipe laid in gravel below slab level, and water collected and routed to a sump basin with a pump discharging well away from the house. This does not stop water reaching the wall; it collects it and removes it before it reaches the room.
 
-Exterior excavation and membrane is the most thorough and the most expensive route, involving digging out the wall, sealing it, and installing a proper footing drain. It is justified in a minority of cases and is a large disruption to a garden.
+Exterior excavation and membrane is the most thorough and the most expensive route, involving digging out the wall, sealing it, and installing a proper footing drain. It is justified in a minority of cases and is a large disruption to a yard.
 
 Wall repair where the leak is a crack, using polyurethane injection which stays flexible and tolerates minor future movement.
 

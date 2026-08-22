@@ -9,6 +9,14 @@
   --muted:      #6b7280;
   --surface:    #f8faf8;
   --line:       #e5e7eb;
+
+  /* The one button color every site's primary action uses — the hero form's
+     submit and the call button are the same class of action and must look it.
+     Named --cta rather than --red because on the tree service it is amber, and
+     a variable called "red" holding an orange is how the next clone breaks. */
+  --cta:        #dc2626;
+  --cta-dk:     #b91c1c;
+  --cta-ink:    #ffffff;
   --radius:     10px;
   --wrap:       1120px;
 }
@@ -207,18 +215,18 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .quote-form textarea { resize: vertical; }
 .quote-form input:focus, .quote-form textarea:focus {
-  outline: 2px solid var(--red); outline-offset: 1px; border-color: var(--red);
+  outline: 2px solid var(--cta); outline-offset: 1px; border-color: var(--cta);
 }
 /* Same red as the call button — this and the phone are the two things we want
    pressed, so they should look like the same class of action. */
 .quote-form button {
-  width: 100%; background: var(--red); color: #fff; border: 0; border-radius: var(--radius);
+  width: 100%; background: var(--cta); color: var(--cta-ink); border: 0; border-radius: var(--radius);
   padding: .8rem 1rem; font: inherit; font-weight: 800; font-size: 1rem; cursor: pointer;
   margin-top: .3rem;
 }
-.quote-form button:hover { background: var(--red-dk); }
+.quote-form button:hover { background: var(--cta-dk); }
 .quote-form .qf-note { margin: .8rem 0 0; font-size: .82rem; color: var(--muted); text-align: center; }
-.quote-form .qf-note a { color: var(--red-dk); font-weight: 700; }
+.quote-form .qf-note a { color: var(--cta-dk); font-weight: 700; }
 .quote-form .hp { position: absolute; left: -9999px; width: 1px; height: 1px; }
 
 /* ---------- submission confirmation ----------

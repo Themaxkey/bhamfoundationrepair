@@ -1,7 +1,7 @@
 ---
 title: "Can you sell a house with foundation problems in Alabama?"
-seoTitle: "Selling a House With Foundation Problems in Alabama | Disclosure"
-description: "Alabama is a caveat emptor state, which surprises people. What that means for a seller who knows the foundation has moved, and where the duty to speak up still applies."
+seoTitle: "Selling a House With Foundation Problems in Alabama"
+description: "Alabama is a caveat emptor state, which surprises people. What that means for a seller who knows the foundation has moved, and where you must still speak up."
 question: "Can you sell a house with foundation problems in Alabama?"
 ---
 

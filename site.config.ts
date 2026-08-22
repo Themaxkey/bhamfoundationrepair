@@ -56,6 +56,20 @@ export const site = {
     logo:      '/images/logo.png',
   },
 
+  /**
+   * Hero form copy. This lives here, not in QuoteForm.astro, because it is the
+   * ONLY part of the form that is trade-specific — and a hardcoded placeholder
+   * is exactly the class of thing that survives a clone into the next market.
+   * The Birmingham form shipped asking about "cracks in the brick"; on a tree
+   * service that would have read as nonsense to every visitor.
+   */
+  form: {
+    heading:     'Get a free inspection',
+    sub:         'Tell us where you are and what you are seeing. No charge, no obligation.',
+    placeholder: 'Cracks in the brick, sloping floor, damp crawl space…',
+    button:      'Request my free inspection',
+  },
+
   legal: {
     disclosure:
       'Requests submitted through this website are shared with local, licensed and insured foundation and crawl space contractors, who will contact you directly using the details you provide.',

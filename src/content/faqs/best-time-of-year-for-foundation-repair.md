@@ -1,7 +1,7 @@
 ---
 title: "What time of year is best for foundation repair?"
 seoTitle: "Best Time of Year for Foundation Repair | Birmingham, AL"
-description: "Why the season changes what an inspection can see in Birmingham's clay, why it barely changes the repair itself, and why waiting for a better month usually costs money."
+description: "Why the season changes what an inspection can see in Birmingham's clay, why it barely changes the repair, and why waiting for a better month costs money."
 question: "What time of year is best for foundation repair?"
 ---
 
@@ -11,7 +11,7 @@ The honest answer is that the season matters a great deal for the inspection and
 
 Birmingham sits on clay with a high shrink-swell potential. It takes on water and expands through the wet months, then gives that water up and contracts through the dry ones. Roughly fifty-four inches of rain a year, arriving in bursts between hot dry spells, means the ground under your house is rarely the same volume in August as it was in March.
 
-That has a direct consequence for diagnosis. In late summer and early autumn, when the clay has shrunk as far as it is going to, settlement is at its most pronounced. Doors that stick only in September, a crack that opens a little each August, a gap under a skirting board that closes by Christmas — that is the season showing you the full range of movement.
+That has a direct consequence for diagnosis. In late summer and early fall, when the clay has shrunk as far as it is going to, settlement is at its most pronounced. Doors that stick only in September, a crack that opens a little each August, a gap under a baseboard that closes by Christmas — that is the season showing you the full range of movement.
 
 Inspect the same house in February, after months of rain have swollen the soil back up, and some of those symptoms will have partly closed. Not because anything was fixed, but because the ground pushed back up. It is entirely possible to look at a house in late winter and underestimate what it does in a bad year.
 
@@ -23,7 +23,7 @@ Piers are installed to reach load-bearing soil or rock beneath the active zone �
 
 So the repair itself works year round. Crews work through Alabama winters without much difficulty, and the ground rarely freezes hard enough here to be a factor the way it is further north.
 
-There are practical differences rather than structural ones. Excavation in saturated clay is slower, messier and harder on your garden. Interior work like crawl space encapsulation is genuinely season-independent. And most contractors are busiest in spring, after homeowners spend a wet winter noticing new cracks, so scheduling in late autumn or winter is often quicker.
+There are practical differences rather than structural ones. Excavation in saturated clay is slower, messier and harder on your yard. Interior work like crawl space encapsulation is genuinely season-independent. And most contractors are busiest in spring, after homeowners spend a wet winter noticing new cracks, so scheduling in late fall or winter is often quicker.
 
 ## The Argument Against Waiting
 

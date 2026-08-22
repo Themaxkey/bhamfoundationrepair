@@ -1,9 +1,9 @@
 /**
  * Cloudflare Worker — the only server-side code in this project.
  *
- * Almost every request is a static file and goes straight to env.ASSETS.
- * The two exceptions are the contact form endpoint and a legacy sitemap
- * redirect left over from the WordPress site.
+ * Almost every request is a static file and goes straight to env.ASSETS. The
+ * exceptions are three POST endpoints: /api/contact for the lead form,
+ * /api/voicemail and /api/missed-call for the Twilio Studio flow.
  *
  * LEAD_TO, LEAD_FROM and VOICEMAIL_TOKEN live in wrangler.jsonc so that every
  * build carries them. RESEND_KEY is a dashboard secret and must never be
@@ -44,14 +44,16 @@ export default {
 /**
  * The business name, for email subject lines.
  *
- * Both sites send from the SAME Resend-verified sender — see LEAD_FROM in
- * wrangler.jsonc — because the free tier allows one domain only. The sender
- * address therefore does not
- * distinguish them and neither did the old subjects — "Voicemail from +1..."
- * was identical whichever site it came from, so the two businesses' mail could
- * not be told apart or filtered in Gmail. LEAD_FROM already carries the right
- * display name per site, so parse it from there rather than hardcoding a
- * string that will be forgotten when this template is cloned again.
+ * Each site now sends from its own Resend-verified domain — see LEAD_FROM in
+ * wrangler.jsonc. That was not always true: this comment used to say the free
+ * tier allowed a single domain, which was simply wrong, and while it was
+ * believed all three sites shared one sender. The subjects were identical too
+ * — "Voicemail from +1..." whichever site it came from — so the businesses'
+ * mail could not be told apart or filtered in Gmail.
+ *
+ * LEAD_FROM already carries the right display name per site, so parse it from
+ * there rather than hardcoding a string that will be forgotten the next time
+ * this template is cloned.
  */
 function businessName(env: Env): string {
   const m = (env.LEAD_FROM ?? '').match(/^\s*(.+?)\s*</);
