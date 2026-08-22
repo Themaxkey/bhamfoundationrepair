@@ -1,0 +1,64 @@
+BIRMINGHAM HERO IMAGES — where each one goes
+Six images, cropped to 1600x800 (2:1), saved as progressive JPEG.
+Total weight 1.46 MB for all six, down from 16 MB as PNGs.
+
+Drop all six .jpg files into  public/images/  then add the two lines
+shown below to the top of each page's markdown file, INSIDE the ---
+block, under the existing "description:" line.
+
+===================================================================
+src/content/services/foundation-repair.md
+===================================================================
+hero: "foundation-repair-pier-birmingham-al.jpg"
+heroAlt: "Steel push pier bracket and hydraulic ram installed against a house footing in Birmingham, Alabama"
+
+===================================================================
+src/content/services/foundation-crack-repair.md
+===================================================================
+hero: "foundation-crack-repair-stair-step-birmingham-al.jpg"
+heroAlt: "Stair-step crack running through the mortar joints of a brick wall on a Birmingham home"
+
+===================================================================
+src/content/services/basement-waterproofing.md
+===================================================================
+hero: "basement-waterproofing-drain-birmingham-al.jpg"
+heroAlt: "Interior perimeter drain and sump pump being installed in a Birmingham basement"
+
+===================================================================
+src/content/services/crawl-space-encapsulation.md
+===================================================================
+hero: "crawl-space-encapsulation-birmingham-al.jpg"
+heroAlt: "Encapsulated crawl space corner with sealed liner and insulated rim joist in Birmingham, Alabama"
+
+===================================================================
+src/content/services/foundation-inspection.md
+===================================================================
+hero: "foundation-inspection-birmingham-al.jpg"
+heroAlt: "Level and laser being used to measure movement in a cracked foundation wall in Birmingham"
+
+===================================================================
+src/content/pages/service-area.md
+===================================================================
+hero: "birmingham-al-hillside-street-brick-homes.jpg"
+heroAlt: "Brick homes stepped into a wooded hillside street in suburban Birmingham, Alabama"
+
+===================================================================
+WHY THESE WERE RE-CROPPED AND RE-ENCODED
+===================================================================
+They came out of ChatGPT at 1448x1086 (4:3) as PNGs of 2 to 3.2 MB
+each. Two problems with using those as-is.
+
+The page crops heroes to 2:1. Letting CSS do that to a 4:3 image cuts
+a third of the height off, and it cuts from wherever the CSS decides —
+which on the stair-step crack would have taken the top of the crack,
+the part that does all the work. Each of these was cropped by hand
+instead, biased per image toward whatever the photo is actually about.
+
+PNG is the wrong format for photographs. Sixteen megabytes of hero
+images would have been the slowest thing on the site by a wide margin,
+and page speed is both a ranking input and, more importantly, the
+thing that decides whether someone on a phone in a driveway waits for
+your page to load. As JPEGs at quality 82 they total 1.46 MB.
+
+If you regenerate any of these, ask for 2:1 and convert to JPEG before
+they go in public/images/. Never commit a multi-megabyte PNG.
