@@ -197,6 +197,52 @@ img { max-width: 100%; height: auto; display: block; }
 }
 .hero-copy p { margin-bottom: 0; }
 
+/* ---------- home hero photograph ----------
+   The home page hero image is the BACKGROUND of the blue band, with the
+   headline and the lead form on top of it. It used to render as a separate
+   full-width figure underneath the band, which cost most of a screen of
+   scrolling before anyone reached a word of real content.
+
+   A scrim of the brand color goes over the photo so the type stays readable.
+   These are worst-case numbers — measured against a PURE WHITE pixel behind
+   the scrim, which is the brightest thing any photo can put there:
+
+     scrim 85% (mobile, flat)   background rgb(65, 88, 119)
+                                h1 white       7.32:1
+                                body #dbe4ef  5.70:1
+     scrim 90% (desktop, left)  background rgb(53, 78, 111)
+                                h1 white       8.52:1
+                                body #dbe4ef  6.64:1
+
+   Both clear the 4.5:1 AA threshold, and .hero p is 1.1rem which is UNDER the
+   18.66px large-text cutoff, so 4.5 is the bar it has to clear, not 3.
+
+   On mobile the scrim is flat, because the copy runs the full width there. On
+   desktop the copy only occupies the left column, so the scrim lifts on the
+   right and lets the photograph actually show around the white form card.
+   Do not lighten the left end past 90% without re-running these numbers. */
+.hero.has-photo { position: relative; isolation: isolate; overflow: hidden; }
+.hero-bg {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 45%;
+}
+.hero.has-photo::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  background: rgba(31, 58, 95, .85);
+}
+@media (min-width: 900px) {
+  .hero.has-photo::before {
+    background: linear-gradient(100deg,
+      rgba(31, 58, 95, .93) 0%,
+      rgba(31, 58, 95, .90) 55%,
+      rgba(31, 58, 95, .62) 78%,
+      rgba(31, 58, 95, .55) 100%);
+  }
+}
+/* If the photo fails to load the band keeps the solid brand color underneath,
+   so nothing collapses to unreadable — .hero already sets that background. */
+
 .quote-form {
   background: #fff; border-radius: var(--radius); padding: 1.4rem 1.3rem 1.2rem;
   box-shadow: 0 6px 24px rgba(0,0,0,.18);
