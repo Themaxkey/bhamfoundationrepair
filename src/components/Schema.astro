@@ -15,33 +15,51 @@ const { pageType = 'page', name, description, url, serviceName, townName, faq } 
 const origin = `https://${site.business.domain}`;
 const bizId  = `${origin}/#business`;
 
-/* Service-area business: locality and region only, deliberately no street address. */
+/* ============================ READ BEFORE EDITING ============================
+   This is an Organization, NOT a LocalBusiness / HomeAndConstructionBusiness,
+   and it deliberately publishes NO address and NO coordinates.
+
+   It used to. It emitted addressLocality + postalCode for the target city and
+   a geo point on the city centre — 35801 and 34.7304/-86.5861 on this site,
+   35203 and 33.5186/-86.8104 on Birmingham. Every one of those was invented.
+   The business is not at those coordinates and has no premises in those
+   postcodes. The old comment here said "deliberately no street address", which
+   was half the job: dropping the street while keeping the postcode and a
+   pinpoint lat/long still asserts a location that does not exist.
+
+   Three reasons it is gone rather than corrected:
+
+   1. It was untrue, and this project does not publish claims it cannot stand
+      behind. That rule applies to markup as much as to body copy — arguably
+      more, because nobody proof-reads JSON-LD.
+   2. It contradicted our own citations. The directory listings carry the real
+      Arley address. Publishing a different one here breaks NAP consistency
+      against ourselves, which is a genuine local-search negative.
+   3. It bought nothing. The map pack is gated on a Google Business Profile,
+      which we are not doing. Structured data is not an organic ranking factor.
+      No rich result available to this site depends on an address.
+
+   What actually carries the local signal is unchanged and still here:
+   areaServed, plus the city in titles, headings, body copy and town pages.
+
+   DO NOT reinstate address or geo unless there is a real, verified operator
+   with a real premises to attach them to. site.location.zip / .lat / .lng /
+   .radiusMi and site.trade.schemaType are now unused by design — they are left
+   in site.config.ts for that day, not as an oversight.
+   ============================================================================ */
 const business = {
-  '@type': site.trade.schemaType,
+  '@type': 'Organization',
   '@id': bizId,
   name: site.business.name,
   url: origin + '/',
   telephone: site.business.phoneRaw,
   email: site.business.email,
-  image: origin + site.brand.logo,
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: site.location.city,
-    addressRegion: site.location.stateAbbr,
-    postalCode: site.location.zip,
-    addressCountry: 'US',
-  },
-  geo: { '@type': 'GeoCoordinates', latitude: site.location.lat, longitude: site.location.lng },
+  logo: origin + site.brand.logo,
   areaServed: [
     { '@type': 'City', name: `${site.location.city}, ${site.location.stateAbbr}` },
     ...site.towns.map(t => ({ '@type': 'City', name: `${t.name}, ${site.location.stateAbbr}` })),
     { '@type': 'AdministrativeArea', name: site.location.county },
   ],
-  serviceArea: {
-    '@type': 'GeoCircle',
-    geoMidpoint: { '@type': 'GeoCoordinates', latitude: site.location.lat, longitude: site.location.lng },
-    geoRadius: String(site.location.radiusMi * 1609),
-  },
   makesOffer: site.services.map(s => ({
     '@type': 'Offer',
     itemOffered: { '@type': 'Service', name: `${s.name} in ${site.location.city}, ${site.location.stateAbbr}` },
