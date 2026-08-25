@@ -68,10 +68,19 @@ const related = kind === 'service'
    towns in the same order. Ten town pages carrying an identical lower half is
    what made them near-identical below the fold; a rotating window also spreads
    links evenly instead of pointing every page at the first few towns. */
+/* Town pages step the window by one, so each of them shows a different set of
+   neighbours. Service pages step it by a whole window instead, so the windows
+   tile across the town list rather than overlapping almost completely.
+
+   Stepping service pages by one was wrong on Bowling Green: six services with
+   a six-town window covered towns 0-10 and never reached Glasgow at index 11,
+   which then had no inbound link from any service page at all. Multiplying by
+   the window size makes consecutive service pages pick up where the last one
+   left off, and every town gets covered. */
 const townOffset = kind === 'town'
   ? Math.max(0, site.towns.findIndex(t => t.slug === entry.id))
   : kind === 'service'
-    ? Math.max(0, site.services.findIndex(s => s.slug === entry.id))
+    ? Math.max(0, site.services.findIndex(s => s.slug === entry.id)) * Math.min(6, site.towns.length)
     : 0;
 
 /* Only offer "see all N services" when the grid is actually hiding some.
