@@ -318,6 +318,36 @@ main { padding-bottom: 3rem; }
 }
 .callout p:last-child { margin-bottom: 0; }
 
+/* ---------- breadcrumbs ---------- */
+.breadcrumbs { margin: 0 0 .6rem; }
+.breadcrumbs ol {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-wrap: wrap; gap: .35rem;
+  font-size: .88rem; color: var(--muted);
+}
+.breadcrumbs li { display: flex; align-items: center; gap: .35rem; }
+.breadcrumbs li + li::before { content: '\203A'; color: var(--muted); }
+.breadcrumbs a { color: var(--muted); text-decoration: none; }
+.breadcrumbs a:hover { color: var(--primary); text-decoration: underline; }
+.breadcrumbs [aria-current="page"] { color: var(--body); }
+
+/* ---------- in-content related links ---------- */
+/* These are the only non-boilerplate internal links on the site. Before this
+   there were none at all: not one markdown file on Birmingham or Bowling Green
+   contained an internal link, so every link Google saw lived in the header,
+   the footer or a card grid. */
+.related {
+  border-top: 1px solid var(--line);
+  margin: 2rem 0 0; padding-top: 1.25rem;
+  font-size: .97rem; color: var(--body); max-width: 74ch;
+}
+.related h2 {
+  border-top: 0; padding-top: 0;
+  font-size: 1.05rem; margin: 0 0 .5rem;
+}
+.related p:last-child { margin-bottom: 0; }
+.grid-more { margin: -1.5rem 0 2.5rem; font-size: .93rem; }
+
 /* ---------- footer ---------- */
 .site-footer { background: var(--primary); color: #cbd5e1; padding: 3rem 0 2rem; font-size: .93rem; margin-top: 3rem; }
 .site-footer h4 { color: #fff; font-size: .95rem; margin: 0 0 .7rem; text-transform: uppercase; letter-spacing: .04em; }
@@ -327,6 +357,7 @@ main { padding-bottom: 3rem; }
 .footer-grid ul { list-style: none; padding: 0; margin: 0; }
 .footer-grid li { margin-bottom: .4rem; }
 .footer-bottom { border-top: 1px solid #3c5a80; margin-top: 2rem; padding-top: 1.25rem; color: #94a3b8; font-size: .85rem; }
+.footer-legal { margin: .35rem 0 .75rem; }
 .disclosure { max-width: 78ch; }
 
 /* ---------- sticky mobile call bar ---------- */
