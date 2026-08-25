@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import { site } from '../../../site.config';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 
 export async function getStaticPaths() {
   const faqs = await getCollection('faqs');
@@ -15,9 +16,7 @@ const faqBlock = d.question ? [{ question: d.question, answer: d.description }] 
 ---
 <BaseLayout seoTitle={d.seoTitle} description={d.description} pageType="faq" faq={faqBlock}>
   <div class="wrap page-head">
-    <nav aria-label="Breadcrumb" style="font-size:.9rem;color:var(--muted);">
-      <a href="/">Home</a> &rsaquo; <a href="/faq/">FAQ</a>
-    </nav>
+    <Breadcrumbs kind="faq" name={d.title} path={`/faq/${entry.id}/`} />
     <h1>{d.title}</h1>
   </div>
   {d.hero && (
@@ -30,6 +29,13 @@ const faqBlock = d.question ? [{ question: d.question, answer: d.description }] 
 
   <div class="wrap">
     <article class="prose"><Content /></article>
+    <aside class="related">
+      <p>
+        More answers on the <a href="/faq/">{site.trade.noun} FAQ</a>, or see
+        what we actually do on the <a href="/services/">services page</a> and
+        where we work across <a href="/service-area/">{site.location.county}</a>.
+      </p>
+    </aside>
     <div class="callout">
       <p>Still have a question? Call <a href={`tel:${site.business.phoneRaw}`}>{site.business.phone}</a>.</p>
     </div>

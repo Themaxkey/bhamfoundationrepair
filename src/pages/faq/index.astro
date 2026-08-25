@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { site } from '../../../site.config';
 
 const entry = await getEntry('pages', 'faq');
@@ -16,6 +17,7 @@ const d: any = entry?.data ?? {
 ---
 <BaseLayout seoTitle={d.seoTitle} description={d.description} pageType="faq">
   <div class="wrap page-head">
+    <Breadcrumbs kind="page" name={d.title} path="/faq/" />
     <h1>{d.title}</h1>
   </div>
   <div class="wrap">
