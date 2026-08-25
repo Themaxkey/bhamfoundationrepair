@@ -24,7 +24,12 @@ interface Props {
 }
 
 const { exclude, limit, offset = 0 } = Astro.props;
-const tradeTitle = site.trade.noun.replace(/\b\w/g, (c) => c.toUpperCase());
+/* Title case for the anchor, because that is a link label: "Tree Removal in
+   Franklin, KY". Sentence case for the blurb underneath, because that is a
+   sentence — "Tree Removal and related work for homes in Franklin." is how a
+   template gives itself away. */
+const tradeTitle    = site.trade.noun.replace(/\b\w/g, (c) => c.toUpperCase());
+const tradeSentence = site.trade.noun.charAt(0).toUpperCase() + site.trade.noun.slice(1);
 
 const pool = site.towns.filter((t) => t.slug !== exclude);
 // pool can be empty in a one-town market once `exclude` removes the only
@@ -37,7 +42,7 @@ const towns = limit ? ordered.slice(0, limit) : ordered;
   {towns.map((t) => (
     <a class="card" href={`/${t.slug}/`}>
       <strong>{tradeTitle} in {t.name}, {site.location.stateAbbr}</strong>
-      <span>{tradeTitle} and related work for homes in {t.name}.</span>
+      <span>{tradeSentence} and related work for homes in {t.name}.</span>
     </a>
   ))}
 </div>
