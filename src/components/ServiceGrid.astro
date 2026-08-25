@@ -1,12 +1,32 @@
 ---
 import { site } from '../../site.config';
 import { getCollection } from 'astro:content';
+
+/* `exclude` stops a service page linking to itself in its own related block.
+   `limit` caps the list so a town page is not repeating all eleven services
+   verbatim underneath every one of its ten siblings.
+
+   Deliberately NOT doing here what TownGrid does with anchor text: a link
+   labelled "Foundation Repair in Hoover" that lands on the metro-wide
+   /foundation-repair/ page would be over-optimised anchor text pointing at a
+   page that does not match the promise. The town-specific page is the one
+   that earns that anchor, and TownGrid already gives it. */
+
+interface Props {
+  exclude?: string;
+  limit?: number;
+}
+
+const { exclude, limit } = Astro.props;
 const entries = await getCollection('services');
-const byId = new Map(entries.map(e => [e.id, e.data]));
+const byId = new Map(entries.map((e) => [e.id, e.data]));
+
+const pool = site.services.filter((s) => s.slug !== exclude);
+const services = limit ? pool.slice(0, limit) : pool;
 ---
 <div class="grid">
-  {site.services.map(s => {
-    const d = byId.get(s.slug);
+  {services.map((s) => {
+    const d: any = byId.get(s.slug);
     return (
       <a class="card" href={`/${s.slug}/`}>
         <strong>{s.name}</strong>

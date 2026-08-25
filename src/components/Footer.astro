@@ -1,6 +1,29 @@
 ---
 import { site } from '../../site.config';
 const year = new Date().getFullYear();
+
+/* Two changes here, both about where link equity goes.
+
+   1. The town list was `slice(0, 8)`. Birmingham has ten towns, Bowling Green
+      has twelve — so the last two and the last four respectively were linked
+      from the header dropdown only, and never from the footer. There was no
+      reason for the cut-off; it just silently starved whichever towns happened
+      to sit at the bottom of site.config.
+
+   2. Privacy Policy and SMS Terms sat in the "Company" column alongside About
+      and Contact, getting a site-wide link from every page. Both carry
+      `noindex` and are excluded from the sitemap, so every one of those links
+      was pointing equity at a page that cannot rank. They still have to be
+      reachable — Twilio's A2P registration requires it — so they move to the
+      small print row rather than disappearing.
+
+   The Costs page is added because it was a genuine orphan: present in
+   site.config.staticPages and in site.config.nav, rendered by neither the
+   header nor the footer, and linked from no markdown file on any of the three
+   sites. Google only ever found it through the sitemap, which is why it was
+   sitting at position 91. */
+
+const costPage = site.staticPages.find((p) => p.slug.endsWith('-cost'));
 ---
 <footer class="site-footer">
   <div class="wrap">
@@ -17,28 +40,39 @@ const year = new Date().getFullYear();
         <h4>Services</h4>
         <ul>
           {site.services.map(s => <li><a href={`/${s.slug}/`}>{s.name}</a></li>)}
+          <li><a href="/services/">All services</a></li>
         </ul>
       </div>
       <div>
         <h4>Service Area</h4>
         <ul>
-          {site.towns.slice(0, 8).map(t => <li><a href={`/${t.slug}/`}>{t.name}, {site.location.stateAbbr}</a></li>)}
+          {site.towns.map(t => (
+            <li>
+              <a href={`/${t.slug}/`}>
+                {site.trade.noun.replace(/\b\w/g, (c) => c.toUpperCase())} in {t.name}, {site.location.stateAbbr}
+              </a>
+            </li>
+          ))}
           <li><a href="/service-area/">All areas served</a></li>
         </ul>
       </div>
       <div>
         <h4>Company</h4>
         <ul>
+          {costPage && <li><a href={`/${costPage.slug}/`}>{costPage.name}</a></li>}
+          <li><a href="/faq/">FAQ</a></li>
           <li><a href="/about/">About</a></li>
           <li><a href="/contact/">Contact</a></li>
-          <li><a href="/faq/">FAQ</a></li>
-          <li><a href="/privacy-policy/">Privacy Policy</a></li>
-          <li><a href="/sms-terms-and-conditions/">SMS Terms</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
       <p>&copy; {year} {site.business.name}. All rights reserved.</p>
+      <p class="footer-legal">
+        <a href="/privacy-policy/">Privacy Policy</a>
+        <span aria-hidden="true"> &middot; </span>
+        <a href="/sms-terms-and-conditions/">SMS Terms</a>
+      </p>
       <p class="disclosure">{site.legal.disclosure}</p>
     </div>
   </div>

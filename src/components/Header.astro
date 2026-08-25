@@ -4,6 +4,15 @@ const path = Astro.url.pathname;
 const isOn = (href: string) => path === href;
 const inServices = site.services.some(s => path === `/${s.slug}/`) || path === '/services/';
 const inTowns    = site.towns.some(t => path === `/${t.slug}/`) || path === '/service-area/';
+
+/* The costs page was listed in site.config.staticPages and site.config.nav but
+   rendered by neither the header nor the footer, and no markdown file linked
+   to it. It was a true orphan — Google only reached it via the sitemap, which
+   is why Search Console had it at position 91 with 14 impressions. The slug
+   differs per market (foundation-repair-cost, crawl-space-repair-cost) and
+   Bowling Green has no costs page at all, so this is looked up rather than
+   hardcoded, and renders nothing when the page does not exist. */
+const costPage = site.staticPages.find(p => p.slug.endsWith('-cost'));
 ---
 <header class="site-header">
   <div class="wrap bar">
@@ -38,6 +47,9 @@ const inTowns    = site.towns.some(t => path === `/${t.slug}/`) || path === '/se
         </div>
       </div>
 
+      {costPage && (
+        <a href={`/${costPage.slug}/`} aria-current={isOn(`/${costPage.slug}/`) ? 'page' : undefined}>Costs</a>
+      )}
       <a href="/faq/" aria-current={isOn('/faq/') ? 'page' : undefined}>FAQ</a>
       <a href="/about/" aria-current={isOn('/about/') ? 'page' : undefined}>About</a>
       <a href="/contact/" aria-current={isOn('/contact/') ? 'page' : undefined}>Contact</a>
@@ -67,6 +79,7 @@ const inTowns    = site.towns.some(t => path === `/${t.slug}/`) || path === '/se
         {site.towns.map(t => <a href={`/${t.slug}/`}>{t.name}, {site.location.stateAbbr}</a>)}
       </details>
 
+      {costPage && <a href={`/${costPage.slug}/`}>Costs</a>}
       <a href="/faq/">FAQ</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>

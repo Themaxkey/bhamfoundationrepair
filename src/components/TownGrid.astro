@@ -1,11 +1,43 @@
 ---
 import { site } from '../../site.config';
+
+/* The anchor text here used to be the bare town name — "Hoover, AL". That is
+   the single most wasted signal on the site: internal anchor text is one of
+   the strongest hints Google has about what a page is for, and "Hoover, AL"
+   says nothing about foundation repair.
+
+   It now reads "Foundation Repair in Hoover, AL", which is accurate — that is
+   exactly what /foundation-repair-hoover-al/ is about. Do NOT apply the same
+   trick in reverse on ServiceGrid: labelling a link "Foundation Repair in
+   Hoover" when it points at the metro-wide /foundation-repair/ page would be
+   an anchor that promises something the destination does not deliver.
+
+   `exclude` stops a town page linking to itself. `limit` and `offset` let a
+   town page show a rotating window of other towns rather than the same full
+   list on all ten pages, which is what made every town page's lower half
+   identical. */
+
+interface Props {
+  exclude?: string;
+  limit?: number;
+  offset?: number;
+}
+
+const { exclude, limit, offset = 0 } = Astro.props;
+const tradeTitle = site.trade.noun.replace(/\b\w/g, (c) => c.toUpperCase());
+
+const pool = site.towns.filter((t) => t.slug !== exclude);
+// pool can be empty in a one-town market once `exclude` removes the only
+// entry, and `% 0` is NaN, which would slice the array into nothing.
+const cut = pool.length > 0 ? offset % pool.length : 0;
+const ordered = cut > 0 ? [...pool.slice(cut), ...pool.slice(0, cut)] : pool;
+const towns = limit ? ordered.slice(0, limit) : ordered;
 ---
 <div class="grid">
-  {site.towns.map(t => (
+  {towns.map((t) => (
     <a class="card" href={`/${t.slug}/`}>
-      <strong>{t.name}, {site.location.stateAbbr}</strong>
-      <span>{site.trade.noun.charAt(0).toUpperCase() + site.trade.noun.slice(1)} and related work in {t.name}.</span>
+      <strong>{tradeTitle} in {t.name}, {site.location.stateAbbr}</strong>
+      <span>{tradeTitle} and related work for homes in {t.name}.</span>
     </a>
   ))}
 </div>

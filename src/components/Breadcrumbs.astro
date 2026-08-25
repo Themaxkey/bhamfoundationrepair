@@ -1,0 +1,79 @@
+---
+import { site } from '../../site.config';
+
+/* ============================ WHY THIS EXISTS ================================
+   Before this component the site was a fully-connected graph: the header
+   linked to every service and every town, the footer linked to most of them
+   again, and every service page listed every town while every town page listed
+   every service. Every page was one hop from every other page and carried the
+   same links in the same boilerplate positions.
+
+   That sounds thorough. What it actually does is remove every signal about
+   which page matters. Search Console showed the consequence plainly on
+   Birmingham: /about/ was the page Google served for "foundation repair near
+   me", /contact/ for "foundation repair in mountain brook, al", and /faq/ for
+   "foundation repair in birmingham, al". Those three pages were carrying 33
+   commercial keywords between them at average positions in the 80s, while the
+   actual service pages sat lower.
+
+   The cause is not bad content — the About page is genuinely good. It is that
+   the business name IS the money keyword. Every page's title contains
+   "Birmingham Foundation Repair", so no title distinguishes the service page
+   from the About page, and the flat link graph gave Google nothing else to go
+   on. It guessed, and it guessed badly.
+
+   Breadcrumbs are the cheapest honest hierarchy signal available: they say
+   out loud that /foundation-repair/ sits under /services/ and that
+   /foundation-repair-hoover-al/ sits under /service-area/.
+
+   The JSON-LD here is BreadcrumbList, which is a real rich result and — unlike
+   the address and geo we removed from Schema.astro — every value in it is
+   true. It describes the site's own structure and claims nothing about a
+   premises that does not exist.
+   ============================================================================ */
+
+interface Props {
+  kind: 'service' | 'town' | 'page' | 'faq';
+  name: string;
+  /** Path of the current page, with leading and trailing slash. */
+  path: string;
+}
+
+const { kind, name, path } = Astro.props;
+const origin = `https://${site.business.domain}`;
+
+const parent =
+  kind === 'service' ? { href: '/services/',     label: 'Services' } :
+  kind === 'town'    ? { href: '/service-area/', label: 'Service Area' } :
+  kind === 'faq'     ? { href: '/faq/',          label: 'FAQ' } :
+  null;
+
+const trail = [
+  { href: '/', label: 'Home' },
+  ...(parent && parent.href !== path ? [parent] : []),
+  { href: path, label: name },
+];
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: trail.map((t, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: t.label,
+    item: origin + t.href,
+  })),
+};
+---
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol>
+    {trail.map((t, i) => (
+      <li>
+        {i < trail.length - 1
+          ? <a href={t.href}>{t.label}</a>
+          : <span aria-current="page">{t.label}</span>}
+      </li>
+    ))}
+  </ol>
+</nav>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
